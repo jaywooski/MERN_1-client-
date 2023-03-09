@@ -17,7 +17,7 @@ function Register () {
     // password state declarations
     const [password, setPassword] = useState('')
     const [validPassword, setValidPassword] = useState(false);
-    const [passwordFocus, setValidFocus ] = useState(false);
+    const [passwordFocus, setPasswordFocus ] = useState(false);
 
     // error and success message states
     const [errMsg, setErrMsg] = useState('');
@@ -128,6 +128,9 @@ function Register () {
                     value={email}  
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder='Enter Your Email'
+
+                    onFocus={() => setEmailFocus(true)}
+                    onBlur={() => setEmailFocus(false)} 
                 />
                 <br />
                 <input 
@@ -136,6 +139,9 @@ function Register () {
                     value={password} 
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder='Enter Password'
+
+                    onFocus={() => setPasswordFocus(true)}
+                    onBlur={() => setPasswordFocus(false)} 
                   />
                 <br />
                 <input 
