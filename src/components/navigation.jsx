@@ -13,9 +13,9 @@ const navigation = () => {
                 setValue(newValue);
                 }}
             >
-                <BottomNavigationAction label="Recents" icon={<RestoreIcon />} />
-                <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
-                <BottomNavigationAction label="Archive" icon={<ArchiveIcon />} />
+                <BottomNavigationAction label="Home" icon={<RestoreIcon />} />
+                <BottomNavigationAction label="Tasks" icon={<FavoriteIcon />} />
+                <BottomNavigationAction label="User" icon={<ArchiveIcon />} />
             </BottomNavigation>
         </Paper>
     

@@ -1,12 +1,15 @@
-import React from 'react'
 // import jwt from 'jsonwebtoken'
+// import { useEffect } from 'react';
+
+import React from 'react'
 import { useNavigate } from "react-router-dom";
-import { useEffect } from 'react';
+import { useQuery } from '@apollo/client';
+import { GET_ALL_USERS, GET_USER } from '../queries/userQueries'
 
 function Dashboard() {
 
     const navigate = useNavigate();
-
+    const { loading, error, data } = useQuery(GET_USER)
     // function here to fetch data from api
 
 
@@ -14,32 +17,15 @@ function Dashboard() {
 
     /* ^^^^^^^^^^^^^^^^^^ */
 
-
-
-    // useEffect(() => {
-    //   const token = localStorage.getItem('token')
-    //   if(token) {
-    //     const user = jwt.decode(token);
-    //     if(!user) {
-    //         localStorage.removeItem('token');
-    //         // window.location.href = '/'
-    //         navigate('/login')
-
-    //     } else {
-    //         // function here to do something else like fetching data
-    //         return
-    //     }
-    //   }
-    
-    // }, [])
-    
+    if(loading) return <p>Loading...</p>
+    if(error) return <p>Uh oh! Something happened that's not supposed to...</p>
 
   return (
     <div>
-        <h1>Dashboard</h1>
-        <h3>You made it in!</h3>
-        <h3>Great job!</h3>
-
+        { !loading && !error && (
+          <h1>Dashboard</h1>
+          
+        )}
     </div>
 
   )

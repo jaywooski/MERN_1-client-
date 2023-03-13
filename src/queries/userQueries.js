@@ -1,6 +1,6 @@
 import { gql, useQuery } from "@apollo/client";
 
-const GET_ALL_USERS = gql`
+export const GET_ALL_USERS = gql`
     query getAllUsers {
         users {
             name
@@ -15,7 +15,7 @@ const GET_ALL_USERS = gql`
     }
 ` 
 
-const GET_USER = gql`
+export const GET_USER = gql`
     query getUser($id: String!) {
         user(id: $id) {
             id
@@ -30,5 +30,4 @@ const GET_USER = gql`
     }
 `
 
-module.exports = { GET_ALL_USERS, GET_USER };
 

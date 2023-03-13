@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import { useQuery, useMutation } from "@apollo/client";
+import { LOGIN_USER } from '../mutations/user_mutations';
+import { useNavigate } from 'react-router-dom';
 
 
 const Login = () => {
@@ -8,47 +10,20 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const [active, setActive] = useState(false); //login status as state?
 
-    
-    // async function loginUser(event) {
+    const navigate = useNavigate()
 
-    //     event.preventDefault();
-        
-    //     try {
-            
-    //         const response = await fetch('http://localhost:5000/api/login', {
-    //             method: 'POST',
-    //             headers: {
-    //                 'Content-Type': 'application/json',
-    //             },
-    //             body: JSON.stringify({
-    //                 email,
-    //                 password
-    //             })
-    //         })
-    
-    //         const data = await response.json()
-    //         console.log(data);
-    //         // console.log('success');
 
-    //     } catch (error) {
-    //         console.log(error)
-    //     }
-
-        // if(data) {
-        //     // store web token to localstorage
-        //     // localStorage.setItem('token', data.user)
-        //     alert('Login Successful!')
-        //     window.location.href = '/dashboard'
-
-        // } else {
-        //     alert('Please check username and password!')
-        // }
-
-        
-    // }
+    const [ login, { loading, error }]  = useMutation(LOGIN_USER, {
+        onError: (error) => console.log("Error:", error),
+        onCompleted: (data) => {
+            console.log("Logged in: ", data)
+            navigate("/dashboard");
+        }
+    })
 
     const handleSubmit = (e) => {
-        e.prevent.default()
+        e.preventDefault()
+        login({ variables: { email, password }})
     }
 
   return (
@@ -60,6 +35,7 @@ const Login = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder='Enter Your Email'
+            autoComplete='off'
         />
         <br />
         <input 
@@ -67,11 +43,14 @@ const Login = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder='Enter Password'
+            autoComplete='off'
           />
         <br />
         <input 
             type="submit" 
-            value="Login" />
+            value="Login"
+            onSubmit={handleSubmit}
+            />
     </form>
 </>
   )
