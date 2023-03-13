@@ -1,13 +1,6 @@
 import React, { useState } from 'react'
-import { gql, useQuery, useMutation } from "@apollo/client";
+import { useQuery, useMutation } from "@apollo/client";
 
-const GQL_LOGIN = gql`
-    mutation login{ 
-        email
-        password
-        
-    }
-`;
 
 const Login = () => {
 
@@ -16,30 +9,30 @@ const Login = () => {
     const [active, setActive] = useState(false); //login status as state?
 
     
-    async function loginUser(event) {
+    // async function loginUser(event) {
 
-        event.preventDefault();
+    //     event.preventDefault();
         
-        try {
+    //     try {
             
-            const response = await fetch('http://localhost:5000/api/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    email,
-                    password
-                })
-            })
+    //         const response = await fetch('http://localhost:5000/api/login', {
+    //             method: 'POST',
+    //             headers: {
+    //                 'Content-Type': 'application/json',
+    //             },
+    //             body: JSON.stringify({
+    //                 email,
+    //                 password
+    //             })
+    //         })
     
-            const data = await response.json()
-            console.log(data);
-            // console.log('success');
+    //         const data = await response.json()
+    //         console.log(data);
+    //         // console.log('success');
 
-        } catch (error) {
-            console.log(error)
-        }
+    //     } catch (error) {
+    //         console.log(error)
+    //     }
 
         // if(data) {
         //     // store web token to localstorage
@@ -52,12 +45,16 @@ const Login = () => {
         // }
 
         
+    // }
+
+    const handleSubmit = (e) => {
+        e.prevent.default()
     }
 
   return (
     <>
     <h1>Login</h1>
-    <form onSubmit={loginUser}>
+    <form onSubmit={handleSubmit}>
         <input 
             type="email" 
             value={email}
