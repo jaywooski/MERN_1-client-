@@ -1,4 +1,13 @@
 import React, { useState } from 'react'
+import { gql, useQuery, useMutation } from "@apollo/client";
+
+const GQL_LOGIN = gql`
+    mutation login{ 
+        email
+        password
+        
+    }
+`;
 
 const Login = () => {
 

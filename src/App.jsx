@@ -1,15 +1,24 @@
-// import logo from './logo.svg';
-// import './App.css';
-import Register from './components/Register';
-import Login from './components/Login';
+import Register from './pages/Register';
+import Login from './pages/Login';
+import Dashboard from './pages/Dashboard';
+
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Dashboard from './components/Dashboard';
+
+import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client';
 // import { useState } from "react";
+
+
+const client = new ApolloClient({
+  uri: 'http://localhost:5000/graphql',
+  cache: new InMemoryCache(),
+
+})
 
 function App() {
   
   return (
     <>
+    <ApolloProvider client={client}>
       <BrowserRouter> 
         <Routes>
           <Route path='/login' element={<Login />} />
@@ -19,6 +28,7 @@ function App() {
 
         </Routes>
       </BrowserRouter>
+    </ApolloProvider>
     </>
   )
   
